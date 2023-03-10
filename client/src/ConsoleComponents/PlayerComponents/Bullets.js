@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react"
 
 
 function Bullet(
-    {xPlayer, yPlayer, xMouse, yMouse, zombx, zomby, shot
+    {xPlayer, yPlayer, xMouse, yMouse, zombx, zomby, shot, divisor
         // , handleBullet
 
 }
@@ -13,9 +13,16 @@ function Bullet(
     const bulletRef = useRef() 
 const [bulletXPosition, setBulletXPosition] = useState(xPlayer)
 const [bulletYPosition, setBulletYPosition] = useState(yPlayer)
+const [bulletExist, setBulletExist] = useState(false)
+// console.log(zombx)
+// console.log(zombx)
+console.log(divisor)
 
-// console.log(zombx)
-// console.log(zombx)
+if(Math.random<divisor){
+    setBulletExist(()=>true)
+}
+
+
 
 useEffect(()=>{
     const xDif = xMouse - xPlayer; 
@@ -32,6 +39,14 @@ useEffect(()=>{
     }
     else{bulletRef.current.style.display = "none"}
 },[bulletXPosition, bulletYPosition])
+
+// if(!bulletExist){
+//     // bulletRef.current.marginLeft = "100"
+//     console.log(bulletRef.current)
+// }
+
+// else{bulletRef.current.style.display = "none"}
+
 
 
 if(
@@ -79,15 +94,27 @@ if(
 
 
     return(
+        <>
+
+
+    
+        
     <div className={`bullet`}
     ref={bulletRef}
     style={{
+
+        
         marginLeft: `${bulletXPosition}em`,
         marginTop: `${bulletYPosition}em`
     }}
     >
  {/* <h1>{`x: ${xMouse} y: ${yMouse}`}</h1>  */}
-    </div>)
+    </div>
+    
+       
+    </>
+    
+    )
 }
 
 export default Bullet

@@ -10,13 +10,14 @@ function Zombie({damage, xPlayer, yPlayer, handleGameOver, testWeapon, xMouse, y
     const [killed, setKilled] = useState(false)
     const [fireBullet, setFireBullet] = useState(0)
     const firedBullets = []
+    const [renderBullet, setRenderBullet] = useState(false)
 
-
-    console.log(divisor)
+    
     // const [bullets, setBullets] = useState(0)
     // const [firing, setFiring]= useState(false)
 
 
+console.log(divisor)
 
 // if(bullets%2===1){
 //     setFireBullet(fireBullet => !fireBullet)
@@ -51,7 +52,9 @@ const zombRef = useRef()
 // function stopFire(){
 //     setFiring(()=>false)
 // }
-for(let i=0; i < bullets/divisor; i++){
+
+for(let i=0; i < bullets; i++){
+
 
     (firedBullets).push(<Bullet 
         // handleBullet={handleBullet}
@@ -63,6 +66,7 @@ for(let i=0; i < bullets/divisor; i++){
     zomby={zomby}
     key={i}
     shot={shot}
+    divisor = {divisor}
     />)
 }
 
@@ -94,7 +98,7 @@ useEffect(()=>{
             const xDif = zombx - xPlayer;
             if(xDif>0){setZombx(()=> zombx-.5)}
             if(xDif<0){setZombx(()=>zombx+.5)}
-        }, 10000)
+        }, 1000)
     if(killed){clearInterval(intervalX)}
     return ()=>{clearInterval(intervalX)}
 },[zombx, zomby]);
@@ -111,7 +115,7 @@ useEffect(()=>{
             }
 
 
-        }, 10000
+        }, 1000
     )
     // if(killed){()=>clearInterval(intervalY)}
     
@@ -122,28 +126,28 @@ useEffect(()=>{
 function shot(key){
     if(key==="hit")
     {console.log("hit")}
-        // setHealth(health => health-damage)
+        setHealth(health => health-damage)
     
-        // if(health===5){
-        //     e.target.style.backgroundColor = "blue"
-        // }
-        // if(health===4){
-        //     e.target.style.backgroundColor = "green"
-        // }
-        // if(health===3){
-        //     e.target.style.backgroundColor = "yellow"
-        // }
-        // if(health===2){
-        //     e.target.style.backgroundColor = "orange"
-        // }
-        // if(health===1){
-        //     e.target.style.backgroundColor = "red"
-        // }
-        // if(health===0){
-        //     setKilled(killed => !killed)
-        //     setZombx(()=>100)
-        //     e.target.style.display = "none"
-        // }
+        if(health===5){
+            zombRef.current.style.backgroundColor = "blue"
+        }
+        if(health===4){
+            zombRef.current.style.backgroundColor = "green"
+        }
+        if(health===3){
+            zombRef.current.style.backgroundColor = "yellow"
+        }
+        if(health===2){
+            zombRef.current.style.backgroundColor = "orange"
+        }
+        if(health===1){
+            zombRef.current.style.backgroundColor = "red"
+        }
+        if(health===0){
+            setKilled(killed => !killed)
+            setZombx(()=>100)
+            zombRef.current.style.display = "none"
+        }
     }
 
 // for(let i=0; i < bullets; i++){

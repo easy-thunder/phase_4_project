@@ -37,6 +37,7 @@ function App() {
   }, []);
 
   if (!user) return <Login onLogin={setUser} />
+ 
 
 
 
@@ -67,9 +68,10 @@ function App() {
 
 
         
-        <Home user = {user} />
+        <Home setUser={setUser} user = {user} />
         <Switch>
-        
+
+          
 
 
         <Route exact path = {`/profile/${user.username}`}>

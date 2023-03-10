@@ -8,7 +8,7 @@ function SignOut({ setUser, user}){
   function handleLogoutClick() {
     fetch("/logout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
-        setUser(null);
+        setUser(()=>null);
         history.push('/')
 
       }

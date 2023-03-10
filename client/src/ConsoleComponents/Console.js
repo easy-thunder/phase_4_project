@@ -116,7 +116,7 @@ function Console({currentWeapon}){
 
     for(let i=1; i <= 2**level; i++){
 
-        let divisor = Math.max(i)
+        let divisor = 1/(2**level)
         zombies.push(
         <Zombie 
         key={i}
@@ -200,7 +200,7 @@ function startGame(){
         
 > 
 {/* {xMouse ? <h1>{`x: ${xMouse} y: ${yMouse}`}</h1> : null} */}
-<button className="start" onClick={startGame}>nextLevel</button>
+<button className="start" onClick={startGame}>nextLevel{level}</button>
         {grids}
 
 

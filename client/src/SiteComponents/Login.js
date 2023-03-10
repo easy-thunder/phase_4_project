@@ -19,9 +19,8 @@ function Login({onLogin}){
 
             
             <h1>The BAMFS</h1>
-<Console />
 
-    <img src="../public/bamfs_login_screen.png" alt="not working" />
+    <img src="/bamfs_login_screen.png" alt="not working" />
       {showLogin ? (
         <>
           <SignInForm onLogin={onLogin} />
