@@ -4,22 +4,23 @@ import { useState, useEffect, useRef } from "react"
 
 
 function Bullet(
-    {xPlayer, yPlayer, xMouse, yMouse
+    {xPlayer, yPlayer, xMouse, yMouse, zombx, zomby, shot
         // , handleBullet
 
 }
 )
 {
     const bulletRef = useRef() 
-const [bulletXPosition, setBulletXPosition] = useState(0)
-const [bulletYPosition, setBulletYPosition] = useState(0)
+const [bulletXPosition, setBulletXPosition] = useState(xPlayer)
+const [bulletYPosition, setBulletYPosition] = useState(yPlayer)
 
-
+// console.log(zombx)
+// console.log(zombx)
 
 useEffect(()=>{
     const xDif = xMouse - xPlayer; 
     const yDif = yMouse - yPlayer;
-    if(bulletXPosition<50 && bulletXPosition>-50&& bulletYPosition<50 && bulletYPosition>-50)
+    if(bulletXPosition<100 && bulletXPosition>-100&& bulletYPosition<100 && bulletYPosition>-100)
     {
         const interval = setInterval(
             function(){
@@ -33,7 +34,9 @@ useEffect(()=>{
 },[bulletXPosition, bulletYPosition])
 
 
-
+if(
+    zombx > bulletXPosition-2 && zombx < bulletXPosition +2 && zomby > bulletYPosition-2 && zomby < bulletYPosition + 2
+){shot("hit")}
 // useEffect(()=>{
 
 //     const yDif = yMouse - yPlayer ;

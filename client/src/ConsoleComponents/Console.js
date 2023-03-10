@@ -3,6 +3,7 @@ import Grid from "./Grid"
 import { useState, useEffect, useRef } from "react"
 import Zombie from "./zombies";
 import Bullet from "./PlayerComponents/Bullets";
+import { matchPath } from "react-router-dom";
 
 
 function Console({currentWeapon}){
@@ -16,7 +17,7 @@ function Console({currentWeapon}){
     // const [bulletsY, setBulletsY] = useState([])
     const [level, setLevel] = useState(1)
     const [firing, setFiring]= useState(false)
-    const firedBullets = []
+    // const firedBullets = []
     const zombies = []
 
 
@@ -41,12 +42,11 @@ function Console({currentWeapon}){
 // setBulletsY(()=>bulletYPosition)
 
 // }
-
     useEffect(
         () => {
        function update (e){
-            setXMouse(e.clientX/16-1)
-            setYMouse(e.clientY/16-5)
+            setXMouse(e.clientX/16)
+            setYMouse(e.clientY/16-15)
         }
         document.addEventListener('mousemove', update)
         return () => {
@@ -114,9 +114,12 @@ function Console({currentWeapon}){
         }
     }
 
-    for(let i=0; i <= 2**level; i++){
+    for(let i=1; i <= 2**level; i++){
+
+        let divisor = Math.max(i)
         zombies.push(
-        <Zombie key={i}
+        <Zombie 
+        key={i}
         number={i+1}
         damage={testWeapon.damage} 
         xPlayer={xPlayer}
@@ -124,12 +127,17 @@ function Console({currentWeapon}){
         xMouse = {xMouse}
         yMouse = {yMouse}
         handleGameOver={handleGameOver}
-        firedBullets= {firedBullets}
+        // firedBullets= {firedBullets}
         testWeapon={testWeapon}
+        bullets={bullets}
+        divisor={divisor}
+
         />
         
         )}
-
+function shot(key){
+    console.log("shot")
+}
 
 
 
@@ -170,17 +178,7 @@ useEffect(()=>{
         }
       },[firing])
 
-    for(let i=0; i < bullets; i++){
-
-        firedBullets.push(<Bullet 
-            // handleBullet={handleBullet}
-        xPlayer={xPlayer}
-        yPlayer={yPlayer}
-        xMouse={xMouse}
-        yMouse={yMouse}
-        key={i}
-        />)
-    }
+    
 
 
 

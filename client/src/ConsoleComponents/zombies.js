@@ -3,58 +3,83 @@ import Bullet from "./PlayerComponents/Bullets"
 
 
 
-function Zombie({damage, xPlayer, yPlayer, handleGameOver, testWeapon, firedBullets, xMouse, yMouse}){
+function Zombie({damage, xPlayer, yPlayer, handleGameOver, testWeapon, xMouse, yMouse, bullets, divisor}){
     const [health, setHealth] = useState(6)
     const [zombx, setZombx] = useState(Math.random()*(50-0) + 0)
     const [zomby, setZomby] = useState(Math.random()*-(50-10)- 10)
     const [killed, setKilled] = useState(false)
-    const [bullets, setBullets] = useState(0)
-    const [firing, setFiring]= useState(false)
+    const [fireBullet, setFireBullet] = useState(0)
+    const firedBullets = []
 
 
+    console.log(divisor)
+    // const [bullets, setBullets] = useState(0)
+    // const [firing, setFiring]= useState(false)
+
+
+
+// if(bullets%2===1){
+//     setFireBullet(fireBullet => !fireBullet)
+// }
+
+const zombRef = useRef()
     // const bulletRef = useRef() 
     // const [bulletXPosition, setBulletXPosition] = useState(0)
     // const [bulletYPosition, setBulletYPosition] = useState(0)
 
 
 // console.log(firedBullets)
-useEffect(()=>{
-    if(firing){
-            const shootingInterval = 
-            setInterval(
-                function(){
-                    setBullets(bullets => bullets+=1)
+// useEffect(()=>{
+//     if(firing){
+//             const shootingInterval = 
+//             setInterval(
+//                 function(){
+//                     setBullets(bullets => bullets+=1)
 
                         
-                }, 1000*testWeapon.fire_rate
-                )
-                if(!firing){return()=>clearInterval(shootingInterval)}
-                return()=>clearInterval(shootingInterval)
-        }
-      },[firing])
+//                 }, 1000*testWeapon.fire_rate
+//                 )
+//                 if(!firing){return()=>clearInterval(shootingInterval)}
+//                 return()=>clearInterval(shootingInterval)
+//         }
+//       },[firing])
 
-function fire(){
-    setFiring(()=>true)
+// function fire(){
+//     setFiring(()=>true)
+// }
+
+// function stopFire(){
+//     setFiring(()=>false)
+// }
+for(let i=0; i < bullets/divisor; i++){
+
+    (firedBullets).push(<Bullet 
+        // handleBullet={handleBullet}
+    xPlayer={xPlayer}
+    yPlayer={yPlayer}
+    xMouse={xMouse}
+    yMouse={yMouse}
+    zombx={zombx}
+    zomby={zomby}
+    key={i}
+    shot={shot}
+    />)
 }
 
-function stopFire(){
-    setFiring(()=>false)
-}
-
-useEffect(()=>{
-    if(firing){
-            const shootingInterval = 
-            setInterval(
-                function(){
-                    setBullets(bullets => bullets+=1)
+// useEffect(()=>{
+//     if(firing){
+//             const shootingInterval = 
+//             setInterval(
+//                 function(){
+//                     setBullets(bullets => bullets+=1)
 
                         
-                }, 1000*testWeapon.fire_rate
-                )
-                if(!firing){return()=>clearInterval(shootingInterval)}
-                return()=>clearInterval(shootingInterval)
-        }
-      },[firing])
+//                 }, 1000*testWeapon.fire_rate
+//                 )
+//                 if(!firing){return()=>clearInterval(shootingInterval)}
+//                 return()=>clearInterval(shootingInterval)
+//         }
+//       },[firing])
 
     if(
         zombx > xPlayer-3 && zombx < xPlayer +1.5 && zomby > yPlayer-3 && zomby < yPlayer + 3
@@ -94,70 +119,56 @@ useEffect(()=>{
 }
 
 ,[zombx, zomby]);
+function shot(key){
+    if(key==="hit")
+    {console.log("hit")}
+        // setHealth(health => health-damage)
+    
+        // if(health===5){
+        //     e.target.style.backgroundColor = "blue"
+        // }
+        // if(health===4){
+        //     e.target.style.backgroundColor = "green"
+        // }
+        // if(health===3){
+        //     e.target.style.backgroundColor = "yellow"
+        // }
+        // if(health===2){
+        //     e.target.style.backgroundColor = "orange"
+        // }
+        // if(health===1){
+        //     e.target.style.backgroundColor = "red"
+        // }
+        // if(health===0){
+        //     setKilled(killed => !killed)
+        //     setZombx(()=>100)
+        //     e.target.style.display = "none"
+        // }
+    }
 
-for(let i=0; i < bullets; i++){
+// for(let i=0; i < bullets; i++){
 
-firedBullets.push(<Bullet 
-    // handleBullet={handleBullet}
-xPlayer={xPlayer}
-yPlayer={yPlayer}
-xMouse={xMouse}
-yMouse={yMouse}
-key={i}
-/>)
-}
-
-
-// useEffect(()=>{
-//     const xDif = xMouse - xPlayer; 
-//     const yDif = yMouse - yPlayer;
-//     if(bulletXPosition<50 && bulletXPosition>-50&& bulletYPosition<50 && bulletYPosition>-50)
-//     {
-//         const interval = setInterval(
-//             function(){
-//                 setBulletXPosition(()=>bulletXPosition+xDif/10)
-//                 setBulletYPosition(()=>bulletYPosition+yDif/10)
-//             }, 10
-//         )
-//         return ()=>{clearInterval(interval)}
-//     }
-//     else{bulletRef.current.style.display = "none"}
-// },[bulletXPosition, bulletYPosition])
-
-
-// function shot(e){
-
-//     setHealth(health => health-damage)
-
-//     if(health===5){
-//         e.target.style.backgroundColor = "blue"
-//     }
-//     if(health===4){
-//         e.target.style.backgroundColor = "green"
-//     }
-//     if(health===3){
-//         e.target.style.backgroundColor = "yellow"
-//     }
-//     if(health===2){
-//         e.target.style.backgroundColor = "orange"
-//     }
-//     if(health===1){
-//         e.target.style.backgroundColor = "red"
-//     }
-//     if(health===0){
-//         setKilled(killed => !killed)
-//         setZombx(()=>100)
-//         e.target.style.display = "none"
-        
-//     }
+// firedBullets.push(<Bullet 
+//     // handleBullet={handleBullet}
+// xPlayer={xPlayer}
+// yPlayer={yPlayer}
+// xMouse={xMouse}
+// yMouse={yMouse}
+// zombX={zombx}
+// zomby={zomby}
+// shot={shot}
+// key={i}
+// />)
 // }
+
 
 return(
     <div>
     <div className="zombie" 
     // onClick={shot}
-    onMouseDown={fire}
-    onMouseUp={stopFire}
+    ref={zombRef}
+    // onMouseDown={fire}
+    // onMouseUp={stopFire}
     style={{
         marginLeft: `${zombx}em`,
         marginTop: `${zomby}em`        
